@@ -25,5 +25,5 @@ def combine(length, cat):
     return res
 
 # 测试结果
-length, cat = 2, 3
+length, cat = 9, 3
 print(combine(length, cat))
