@@ -46,6 +46,13 @@ def maximalSquare(matrix):
             mem[i][0] = 1
             res = 1
 
+    # 矩阵最上面一行如果存在为 1 的元素，那么该位置的最大正方形边长就是 1
+    # 更新整个矩阵的最大正方形边长 res
+    for j in range(1, n):
+        if matrix[0][j] == 1:
+            mem[0][j] = 1
+            res = 1
+
     # 动态规划
     for i in range(1, m):
         for j in range(1, n):
@@ -56,5 +63,5 @@ def maximalSquare(matrix):
     return res*res
 
 # 验证
-matrix = [[1,0,1,0,0],[1,0,1,1,1],[1,1,1,1,1],[1,0,0,1,0]]
+matrix = [[1,0,1,1,1],[1,0,1,1,1],[1,1,1,1,1],[1,0,0,1,0]]
 print(maximalSquare(matrix))
