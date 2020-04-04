@@ -4,6 +4,7 @@
 '''
 思路: 
 遍历数组，在每次遍历的基础上，遍历从0到该位置的数组，时间复杂度为O(n^2)
+mem (一维数组) 记录该位置的最长上升子序列的个数
 '''
 
 def lengthOfLIS(nums):
@@ -16,4 +17,4 @@ def lengthOfLIS(nums):
                 mem[j] = max(mem[j], mem[i]+1)
     return mem
 
-print(lengthOfLIS([1,2,3,4,0,2,3]))
+print(lengthOfLIS([1,2,3,9,0,2,3]))
