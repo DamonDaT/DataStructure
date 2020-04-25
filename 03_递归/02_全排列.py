@@ -6,20 +6,42 @@
 思路: 递归，每次固定一个元素，对其他元素进行求解
 '''
 
-def Permutation(ss):
-
+# 字符串形式
+def permutation_str(ss):
     # 递归终止条件
     if len(ss) <= 1:
         return ss
-
+    # 集合去重
     res = set()
     # 遍历字符串，每次固定一个元素
     for i in range(len(ss)):
         # 在固定一个字符串的前提下，其他元素进行全排列
-        for j in Permutation(ss[:i] + ss[i+1:]):
+        for j in permutation_str(ss[:i] + ss[i+1:]):
             # 添加元素并去重
             res.add(ss[i] + j)
     # 返回已排列的结果
     return sorted(res)
 
-print(Permutation('ABC'))
+print(permutation_str('ABC'))
+
+
+# 数组形式
+def permutation_list(nums):
+    # 递归终止条件
+    if nums is None: return []
+    if len(nums) == 1: return [nums]
+    # 数组
+    res = []
+    for x in nums:
+        ys = nums + []
+        # 移除元素
+        ys.remove(x)
+        # 遍历数组，每次固定一个元素
+        for y in permutation_list(ys):
+            # 去重
+            if [x]+y not in res:
+                res.append([x]+y)
+    # 返回已排列的结果
+    return sorted(res)
+
+print(permutation_list([1,2,3]))
