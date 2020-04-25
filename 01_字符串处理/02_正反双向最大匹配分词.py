@@ -20,6 +20,7 @@ class FMM(object):
     def __getMaxLen(self):
         return max(map(len,[w for w in self.word_dict]))
 
+    # 分词
     def cut(self,text):
         result = []
         index = 0
@@ -50,15 +51,17 @@ class RMM(object):
         self.word_dict = word_dict
         self.window_size = self.__getMaxLen()
 
+    # 获取字典中词的最大长度
     def __getMaxLen(self):
         return max(map(len,[w for w in self.word_dict]))
 
+    # 分词
     def cut(self,text):
         result = []
         index = len(text)
         window_size = min(index,self.window_size)
         while index > 0:
-            for size in range(index-window_size,index):
+            for size in range(index-window_size, index):
                 piece = text[size:index]
                 if piece in self.word_dict:
                     index = size + 1
@@ -68,12 +71,13 @@ class RMM(object):
         result.reverse()
         return result
 
+
 '''
 # 双向最大匹配法
 # 1 如果正反向分词结果词数不同，则取分词数量少的那个。
 # 2 如果分词结果词数相同：
 # 2.1 分词结果相同，没有歧义，返回任意一个。
-# 2.2分词结果不同，返回其中单字数量较少的那个。
+# 2.2 分词结果不同，返回其中单字数量较少的那个。
 '''
 class BIMM(object):
     def __init__(self,word_dict):
