@@ -1,5 +1,5 @@
 '''
-【动态规划】 题目: 给定一个数组，求该数组的最长上升子序列的个数
+【动态规划】 题目: 给定一个数组，求该数组的最长上升子序列的个数 (上升序列不一定要连续)
 '''
 '''
 思路: 
@@ -15,6 +15,6 @@ def lengthOfLIS(nums):
         for i in range(0, j):
             if nums[i] < nums[j]:
                 mem[j] = max(mem[j], mem[i]+1)
-    return mem
+    return mem[-1]
 
-print(lengthOfLIS([1,2,3,9,0,2,3]))
+print(lengthOfLIS([1,3,2,6,4,7]))
