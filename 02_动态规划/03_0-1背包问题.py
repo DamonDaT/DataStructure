@@ -12,14 +12,21 @@
 import numpy as np
 
 def knapsack(w, v, C):
+    # len(w)+1 行, C+1 列
     mem = np.zeros((len(w)+1, C+1))
+    # i 代表物品的数量
     for i in range(1, len(w)+1):
+        # j 代表背包的容量
         for j in range(1, C+1):
-            if w[i-1] <= j: # 如果还有空间,要么选下一个放，要么不放
+            # 如果还有空间, 要么选下一个放, 要么不放
+            if w[i-1] <= j:
+                # mem[i-1,j]：表示不放入第i件物品
+                # mem[i-1,j-w[i-1]]+v[i-1]：表示放入第i件物品
                 mem[i,j] = max(mem[i,j], mem[i-1,j], mem[i-1,j-w[i-1]]+v[i-1])
             else:
+                # 没有空间, 则不放入第i件物品
                 mem[i,j] = mem[i-1,j]
 
-    return mem
+    return mem[-1][-1] # return mem
 
 print(knapsack([4,6,2,2,5,1], [8,10,6,3,7,2], 12))
