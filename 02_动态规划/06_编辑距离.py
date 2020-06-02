@@ -22,16 +22,20 @@ def editDistance(word1, word2):
     for j in range(lenW2+1): mem[0][j] = j
     for i in range(1, lenW1+1):
         for j in range(1, lenW2+1):
-            # if 下需要替换操作
+            # 如果当前字符相同, 不需要替换操作
             if word1[i-1] == word2[j-1]:
                 # mem[i][j] = min(mem[i-1][j]+1, mem[i][j-1]+1, mem[i-1][j-1], mem[i-1][j-1]+1)
-                # mem[i][j] = min(mem[i-1][j]+1, mem[i][j-1]+1, mem[i-1][j-1])
-                mem[i][j] = mem[i-1][j-1]
-            # else 下不需要替换操作
+                # mem[i-1][j]+1: 删除操作
+                # mem[i][j-1]+1: 添加操作
+                # mem[i-1][j-1]: 无需替换操作
+                mem[i][j] = min(mem[i-1][j]+1, mem[i][j-1]+1, mem[i-1][j-1])
+            # 如果当前字符不同, 需要替换操作
             else:
-                # 分别是 remove, insert, replace
-                mem[i][j] = 1 + min(mem[i-1][j], mem[i][j-1], mem[i-1][j-1])
-    print(mem)
+                # mem[i-1][j]+1: 删除操作
+                # mem[i][j-1]+1: 添加操作
+                # mem[i-1][j-1]+1: 需要替换操作
+                mem[i][j] = min(mem[i-1][j]+1, mem[i][j-1]+1, mem[i-1][j-1]+1)
+
     return mem[-1][-1]
 
-print(editDistance("there", "taerr"))
+print(editDistance("there", "thaerr"))
