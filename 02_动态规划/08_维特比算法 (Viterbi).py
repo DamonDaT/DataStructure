@@ -57,5 +57,3 @@ def viterbi(x, pi, A, B):
     # 到目前为止，best_seq 存放了对应于 x 的词性序列
     for i in range(len(best_seq)):
         print(id2tag[best_seq[i]])
-
-
